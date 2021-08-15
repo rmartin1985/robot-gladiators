@@ -4,7 +4,7 @@ var playerAttack = 10;
 var playerMoney = 10;
 
 // You can also log multiple values at once like this 
-console.log(playerName, playerAttack, playerHealth);
+console.log(playerName, playerAttack, playerHealth, playerMoney);
 
 var enemyName = "Roborto";
 var enemyHealth = 50;
@@ -63,6 +63,7 @@ var fight = function() {
         // if player did not chose 1 or 2 in prompt
     } else {
         window.alert("You need to pick a valid option. Try again!");
+        fight();
     }
 };
 
