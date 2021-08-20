@@ -1,9 +1,13 @@
-// Game States
-// "Win" - Player robot has defeated all enemy-robots
-//      * Fight all enemy-robots
-//      * Defeat each enemy-robot
-// "lose" - Player robot's health is zero or less
+/* GAME FUNCTIONS */
 
+// function to generate random numeric value
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+    return value;
+};
+
+// function to check if player wants to fight or skip
 var fightOrSkip = function() {
     // ask player if they'd like to fight or skip using fightOrSkip function
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enger "FIGHT" or "SKIP" to choose.');
@@ -30,13 +34,12 @@ var fightOrSkip = function() {
             // return true if player wants to leave
             return true;
         }
-            shop();
     }
     return false;  
-}
+};
+
 // fight function (now with parameter for enemy's name)
 var fight = function(enemy) {
-    // debugger;
     // keep track of who goes first
     var isPlayerTurn = true;
 
@@ -47,7 +50,7 @@ var fight = function(enemy) {
 
     while (playerInfo.health > 0 && enemy.health > 0) {
         if (isPlayerTurn) {
-            // ask player if they'd like to fith or skip using fightOrSkip function
+            // ask player if they'd like to fight or skip using fightOrSkip function
              if (fightOrSkip()) {
                 // if true, leave fight by breaking loop
                 break;
@@ -97,8 +100,6 @@ var fight = function(enemy) {
     }
 };
 
-
-    
 // function to start a new game
 var startGame = function() {
     // reset player stats
@@ -106,6 +107,9 @@ var startGame = function() {
 
     // fight each enemy-robot by looping over them and fighting them one at a time
     for (var i = 0; i < enemyInfo.length; i++) {
+        // check player stats
+        console.log(playerInfo);
+        
         //if player is still alive, keep fighting
         if (playerInfo.health > 0) {
             // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
@@ -116,6 +120,8 @@ var startGame = function() {
 
             // reset enemy.health before starting new fight
             pickedEnemyObj.health = randomNumber(40, 60);
+
+            console.log(pickedEnemyObj);
 
             // pass the pickedenemy.name variable's value into the fight function, where it will assume the value of the enemy.name parameter
             fight(pickedEnemyObj);
@@ -167,8 +173,7 @@ var endGame = function() {
     if (playAgainConfirm) {
         // restart game
         startGame();
-    }
-    else {
+    } else {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
 };
@@ -202,13 +207,6 @@ var shop = function() {
     }
 };
 
-// function to generate random numeric value
-var randomNumber = function(min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
-
-    return value;
-};
-
 var getPlayerName = function() {
     var name = "";
 
@@ -219,6 +217,10 @@ var getPlayerName = function() {
     console.log("Your robot's name is " + name);
     return name;
 };
+
+/* END GAME FUNCTIONS */
+
+/* GAME INFORMATION / VARIABLES */
 
 var playerInfo = {
     name: getPlayerName(),
@@ -235,8 +237,7 @@ var playerInfo = {
             window.alert("Refilling player's health by 20 for 7 dollars.");
             this.health += 20;
             this.money -= 7;
-        }
-        else {
+        } else {
             window.alert("You don't have enough money!");
         }
     },
@@ -245,8 +246,7 @@ var playerInfo = {
             window.alert("Upgrading player's attack by 6 for 7 dollars.");
             this.attack += 6;
             this.money -= 7;
-        }
-        else {
+        } else {
             window.alert("You don't have enough money");
         }
     }
@@ -268,8 +268,7 @@ var enemyInfo = [
 }
 ];
 
-// You can also log multiple values at once like this 
-console.log(playerInfo);
-console.log(enemyInfo);
+/* END GAME INFORMATION / VARIABLES */
 
+/* RUN GAME */
 startGame();
